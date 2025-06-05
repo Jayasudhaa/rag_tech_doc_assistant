@@ -3,8 +3,7 @@ langchain
 langchain-community
 faiss-cpu
 streamlit
-unstructured
-unstructured[all-docs]
+unstructured[pdf]
 pdf2image
 pytesseract
-python-docx
+Pillow
