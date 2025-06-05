@@ -4,3 +4,7 @@ langchain-community
 faiss-cpu
 streamlit
 unstructured
+unstructured[all-docs]
+pdf2image
+pytesseract
+python-docx
