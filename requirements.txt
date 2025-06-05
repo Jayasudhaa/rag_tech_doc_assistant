@@ -7,3 +7,4 @@ unstructured[pdf]
 pdf2image
 pytesseract
 Pillow
+langchain-openai
