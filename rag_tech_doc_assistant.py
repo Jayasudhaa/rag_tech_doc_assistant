@@ -25,15 +25,19 @@ documents = loader.load()
 
 
 #---Step 2: Split into Chunks---
-splitter = RecursiveCharacterTextSplitter(chunk_size= 500, chunk_overlap= 50)
-chunks = splitter.split_documents(documents)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size= 500, chunk_overlap= 50)
+chunks = text_splitter.split_documents(documents)
 
 st.write(f"Loaded {len(documents)} documents")
 st.write(f"Split into {len(chunks)} chunks")
 
 #---Step 3: Generate Embeddings ---
 embeddings = OpenAIEmbeddings()
-vectorstore = FAISS.from_documents(chunks, embeddings)
+if chunks:
+    vectorstore = FAISS.from_documents(chunks, embeddings)
+else:
+    st.error("No text found")
+    st.stop()
 
 #---Step 4: Setup Retrieval Chain--
 retriever = vectorstore.as_retriever()
