@@ -6,10 +6,21 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_community.chat_models import ChatOpenAI
+from langchain_community.document_loaders import TextLoader
+
 import streamlit as st
 
+documents = []
+
+docs_path = "docs"
+for filename in os.listdir(docs_path):
+    if filename.endswith(".txt"):
+        file_path = os.path.join(docs_path, filename)
+        loader = TextLoader(file_path)
+        documents.extend(loader.load())
+
 #----Step 1: Load Docs--
-loader = DirectoryLoader("docs", glob = "**/*.pdf")
+loader = DirectoryLoader("docs", glob = "**/*.txt.", use_multithreading = True)
 documents = loader.load()
 
 
